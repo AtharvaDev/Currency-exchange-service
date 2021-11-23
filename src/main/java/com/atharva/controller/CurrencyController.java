@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.atharva.dto.CurrencyExchange;
 import com.atharva.repo.CurrencyExchangeRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class CurrencyController {
 	
 	@Autowired
@@ -21,7 +24,8 @@ public class CurrencyController {
 	@GetMapping("currency-exchange/from/{from}/to/{to}")
 	public CurrencyExchange getvalue(@PathVariable String from, @PathVariable String to) {
 //		CurrencyExchange currencyExchange = new CurrencyExchange(100L, from, to, BigDecimal.valueOf(50));
-
+		log.info("inside get currency controller of currency-exchange-service");
+		
 		CurrencyExchange currencyExchange = currencyExchangeRepo.findByFromAndTo(from, to);
 		if (currencyExchange ==  null) {
 			throw new RuntimeException("no data found");
